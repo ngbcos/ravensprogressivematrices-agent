@@ -9,22 +9,17 @@ import java.util.HashMap;
  * 
  */
 public class RavensFigure {
-    private String name;
-    private HashMap<String,RavensObject> objects;
-    
-    private String visualFilename;
+    private String name;    
+    private String imageFilename;
         
     /**
      * Creates a new figure for a Raven's Progressive Matrix given a name.
-     * 
-     * Your agent does not need to use this method.
      * 
      * @param name the name of the figure
      */
     public RavensFigure(String name, String problemName, String setName) {
         this.name=name;
-        visualFilename="Problems" + File.separator + setName + File.separator + problemName + File.separator + name + ".png";
-        objects=new HashMap<>();
+        imageFilename="Problems" + File.separator + setName + File.separator + problemName + File.separator + name + ".png";
     }
     
     /**
@@ -44,16 +39,7 @@ public class RavensFigure {
     public String getName() {
         return name;
     }
-    /**
-     * Returns a HashMap of RavensObjects from the figure. This is the verbal
-     * representation of the problem. If no verbal representation is available
-     * (if hasVerbal() returns false), then this HashMap will be empty.
-     * 
-     * @return a HashMap of RavensObject, indexed by object names.
-     */
-    public HashMap<String,RavensObject> getObjects() {
-        return objects;
-    }
+
     /**
      * Returns the filename of the visual representation of this figure in the
      * problem. The files will always be .PNG files.
@@ -61,6 +47,6 @@ public class RavensFigure {
      * @return the filename of the visual representation of this figure.
      */
     public String getVisual() {
-        return visualFilename;
+        return imageFilename;
     }
 }

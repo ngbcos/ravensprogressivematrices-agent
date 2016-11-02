@@ -64,56 +64,27 @@ public class ProblemSet {
         
         String problemType = r.nextLine();
         int correctAnswer = Integer.parseInt(r.nextLine());
-        boolean hasVisual = Boolean.parseBoolean(r.nextLine());
-        boolean hasVerbal = Boolean.parseBoolean(r.nextLine());
         
-        RavensProblem newProblem = new RavensProblem(problemName, problemType, correctAnswer, hasVisual, hasVerbal);
-        if(hasVerbal) {
-            HashMap<String, RavensFigure> figures=new HashMap<>();
-            RavensFigure currentFigure=null;
-            RavensObject currentObject=null;
-            while(r.hasNext()) {
-                String line=r.nextLine();
-                if(!line.startsWith("\t")) {
-                    RavensFigure newFigure=new RavensFigure(line, problemName, getName());
-                    figures.put(line, newFigure);
-                    currentFigure=newFigure;
-                }
-                else if(!line.startsWith("\t\t")) {
-                    line=line.replace("\t", "");
-                    RavensObject newObject=new RavensObject(line);
-                    currentFigure.getObjects().put(line, newObject);
-                    currentObject=newObject;
-                }
-                else if(line.startsWith("\t\t")) {
-                    line=line.replace("\t", "");
-                    String[] split=line.split(":");
-                    currentObject.getAttributes().put(split[0],split[1]);
-                }
-            }
-            newProblem.getFigures().putAll(figures);
-        }
-        else {
-            newProblem.getFigures().put("A", new RavensFigure("A", problemName, getName()));
-            newProblem.getFigures().put("B", new RavensFigure("B", problemName, getName()));
-            newProblem.getFigures().put("C", new RavensFigure("C", problemName, getName()));
-            newProblem.getFigures().put("1", new RavensFigure("1", problemName, getName()));
-            newProblem.getFigures().put("2", new RavensFigure("2", problemName, getName()));
-            newProblem.getFigures().put("3", new RavensFigure("3", problemName, getName()));
-            newProblem.getFigures().put("4", new RavensFigure("4", problemName, getName()));
-            newProblem.getFigures().put("5", new RavensFigure("5", problemName, getName()));
-            newProblem.getFigures().put("6", new RavensFigure("6", problemName, getName()));
+        RavensProblem newProblem = new RavensProblem(problemName, problemType, correctAnswer);
+        newProblem.getFigures().put("A", new RavensFigure("A", problemName, getName()));
+        newProblem.getFigures().put("B", new RavensFigure("B", problemName, getName()));
+        newProblem.getFigures().put("C", new RavensFigure("C", problemName, getName()));
+        newProblem.getFigures().put("1", new RavensFigure("1", problemName, getName()));
+        newProblem.getFigures().put("2", new RavensFigure("2", problemName, getName()));
+        newProblem.getFigures().put("3", new RavensFigure("3", problemName, getName()));
+        newProblem.getFigures().put("4", new RavensFigure("4", problemName, getName()));
+        newProblem.getFigures().put("5", new RavensFigure("5", problemName, getName()));
+        newProblem.getFigures().put("6", new RavensFigure("6", problemName, getName()));
 
-            //3x3 problems have more images to load than 2x2
-            if(problemType.equals("3x3")) {
-                newProblem.getFigures().put("D", new RavensFigure("D", problemName, getName()));
-                newProblem.getFigures().put("E", new RavensFigure("E", problemName, getName()));
-                newProblem.getFigures().put("F", new RavensFigure("F", problemName, getName()));
-                newProblem.getFigures().put("G", new RavensFigure("G", problemName, getName()));
-                newProblem.getFigures().put("H", new RavensFigure("H", problemName, getName()));
-                newProblem.getFigures().put("7", new RavensFigure("7", problemName, getName()));
-                newProblem.getFigures().put("8", new RavensFigure("8", problemName, getName()));
-            }
+        //3x3 problems have more images to load than 2x2
+        if(problemType.equals("3x3")) {
+            newProblem.getFigures().put("D", new RavensFigure("D", problemName, getName()));
+            newProblem.getFigures().put("E", new RavensFigure("E", problemName, getName()));
+            newProblem.getFigures().put("F", new RavensFigure("F", problemName, getName()));
+            newProblem.getFigures().put("G", new RavensFigure("G", problemName, getName()));
+            newProblem.getFigures().put("H", new RavensFigure("H", problemName, getName()));
+            newProblem.getFigures().put("7", new RavensFigure("7", problemName, getName()));
+            newProblem.getFigures().put("8", new RavensFigure("8", problemName, getName()));
         }
         problems.add(newProblem);
     }

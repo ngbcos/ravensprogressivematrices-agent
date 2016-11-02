@@ -12,14 +12,12 @@ import java.util.HashMap;
 public class RavensProblem {
     private String name;
     private String problemType; //2x2 or 3x3
-    private boolean hasVisualRepresentation; //true if visual representations are included
-    private boolean hasVerbalRepresentation; //true if verbal representations are included
     
     private int correctAnswer;
     private int givenAnswer;
     private boolean answerReceived;
-    
     private HashMap<String, RavensFigure> figures;
+    private HashMap<String, Boolean> relationships;
     
     /**
      * Initializes a new Raven's Progressive Matrix problem given a name, a
@@ -30,16 +28,35 @@ public class RavensProblem {
      * @param problemType the type of problem: 2x2 or 3x3
      * @param correctAnswer the correct answer to the problem, a number 1-6 (2x2) or 1-8 (3x3)
      */
-    public RavensProblem(String name, String problemType, int correctAnswer, boolean hasVisual, boolean hasVerbal) {
+    public RavensProblem(String name, String problemType, int correctAnswer) {
         this.name = name;
         this.problemType = problemType;
         this.correctAnswer = correctAnswer;
-        this.hasVisualRepresentation = hasVisual;
-        this.hasVerbalRepresentation = hasVerbal;
         
         figures = new HashMap<>();
         givenAnswer = -1;
         answerReceived = false;
+        InitializeRelationships();
+    }
+    
+    /*
+     * helper method to initialize all possible row and column relationships shapes can take
+     */
+    private void InitializeRelationships() {
+    	relationships.put("horizontal_equal", false);
+    	relationships.put("vertical_equal", false);
+    	relationships.put("horizontal_rotation", false);
+    	relationships.put("vertical_rotation", false);
+    	relationships.put("horizontal_growth", false);
+    	relationships.put("vertical_growth", false);
+    	relationships.put("horizontal_loss", false);
+    	relationships.put("vertical_loss", false);
+    }
+    
+    public void SetRelationshipAsTrue(String key) {
+    	if (relationships.containsKey(key)) {
+    		relationships.put(key, true);
+    	}
     }
     
     
@@ -143,19 +160,4 @@ public class RavensProblem {
         return name;
     }
     
-    
-    /**
-     * Returns whether a verbal representation is supplied for this problem.
-     */
-    public boolean hasVerbal() {
-        return hasVerbalRepresentation;
-    }
-    
-    
-    /**
-     * Returns whether a visual representation is supplied for this problem.
-     */
-    public boolean hasVisual() {
-        return hasVisualRepresentation;
-    }
 }
